@@ -27,7 +27,7 @@ namespace ProjectFun
         Account loan = new Account();
         Account termDeposit = new Account();
         bool session = true;
-        bool endApp = false;
+        
     
 
 
@@ -56,7 +56,7 @@ namespace ProjectFun
             }
             else if (optiono == "e")
             {
-                endApp = true;
+                session = false;
             }
             while (!(optiono == "c") || (optiono == "e"))
             {
@@ -90,7 +90,7 @@ namespace ProjectFun
                                      + "3. Transfer Funds \n"
                                      + "4. Check Account Balance\n"
                                      + "5. Display the transaction\n"
-                                     + "6. Retuen to Previouse Menu\n"
+                                     + "6. Return to Previouse Menu\n"
                                      + "7. End Session\n \n"
                                      + "Enter selection: ");
 
@@ -130,6 +130,7 @@ namespace ProjectFun
                                 newTr.Amount = deposit ;
                                 newTr.Types ="Checking" ;
                                 newTr.DateTime = DateTime.Now;
+                                newTr.TransactionType = "Deposit";
                                 transList.Add(newTr);
                             }
 
@@ -148,6 +149,7 @@ namespace ProjectFun
                                 newTr.Amount = deposit;
                                 newTr.Types = "Business";
                                 newTr.DateTime = DateTime.Now;
+                                newTr.TransactionType = "Deposit";
                                 transList.Add(newTr);
 
                             }
@@ -166,6 +168,7 @@ namespace ProjectFun
                                 newTr.AccountNumber = Selection1._AccountNumber;
                                 newTr.Amount = deposit;
                                 newTr.Types = "Term Deposit";
+                                newTr.TransactionType = "Deposit";
                                 newTr.DateTime = DateTime.Now;
                                 transList.Add(newTr);
 
@@ -174,12 +177,13 @@ namespace ProjectFun
                                 else if (depAccount == 4)
                                 {
 
-                                    if (_loanAcc > 0)
+                                    if (Selection1._loanAcc > 0)
                                     {
                                         Console.WriteLine("\nYour current Loan balance is: " + (loan.getBalance()) + "\n");
 
                                         Console.WriteLine("How much money would you like to deposit?");
                                         double deposit = Convert.ToDouble(Console.ReadLine());
+
 
                                         loan.deposit(deposit);
 
@@ -187,6 +191,7 @@ namespace ProjectFun
                                     newTr.AccountNumber = Selection1._AccountNumber;
                                     newTr.Amount = deposit;
                                     newTr.Types = "Loan";
+                                    newTr.TransactionType = "Deposit";
                                     newTr.DateTime = DateTime.Now;
                                     transList.Add(newTr);
 
@@ -223,6 +228,7 @@ namespace ProjectFun
                                 newTr.AccountNumber = Selection1._AccountNumber;
                                 newTr.Amount = withdraw;
                                 newTr.Types = "Checking";
+                                newTr.TransactionType = "Withdraw";
                                 newTr.DateTime = DateTime.Now;
                                 transList.Add(newTr);
 
@@ -242,6 +248,7 @@ namespace ProjectFun
                                 newTr.AccountNumber = Selection1._AccountNumber;
                                 newTr.Amount = withdraw;
                                 newTr.Types = "Business";
+                                newTr.TransactionType = "Withdraw";
                                 newTr.DateTime = DateTime.Now;
                                 transList.Add(newTr);
 
@@ -260,6 +267,7 @@ namespace ProjectFun
                                 newTr.AccountNumber = Selection1._AccountNumber;
                                 newTr.Amount = withdraw;
                                 newTr.Types = "Term Deposit ";
+                                newTr.TransactionType = "Withdraw";
                                 newTr.DateTime = DateTime.Now;
                                 transList.Add(newTr);
 
@@ -278,6 +286,7 @@ namespace ProjectFun
                                 newTr.AccountNumber = Selection1._AccountNumber;
                                 newTr.Amount = withdraw;
                                 newTr.Types = "Loan ";
+                                newTr.TransactionType = "Withdraw";
                                 newTr.DateTime = DateTime.Now;
                                 transList.Add(newTr);
 
@@ -304,12 +313,18 @@ namespace ProjectFun
                                     checking.withdraw(tranAmount);
                                     business.deposit(tranAmount);
 
-                                    Console.WriteLine("\nYou successfully transferred " + (tranAmount) + " from Savings to Checking");
+                                    Console.WriteLine("\nYou successfully transferred " + (tranAmount) + " from Checking to Checking");
 
                                     Console.WriteLine("\nChecking Balance: " + (checking.getBalance()));
                                     Console.WriteLine("Business Balance: " + (business.getBalance() + "\n"));
+                                newTr.AccountNumber = Selection1._AccountNumber;
+                                newTr.Amount = tranAmount;
+                                newTr.Types = "Transfer ";
+                                newTr.TransactionType = "Transfer";
+                                newTr.DateTime = DateTime.Now;
+                                transList.Add(newTr);
 
-                                }
+                            }
 
                                 else if (tranAccount == 2)
                                 {
@@ -322,12 +337,19 @@ namespace ProjectFun
                                     business.withdraw(tranAmount);
                                     checking.deposit(tranAmount);
 
-                                    Console.WriteLine("\nYou successfully transferred " + (tranAmount) + " from Checking to Savings");
+                                    Console.WriteLine("\nYou successfully transferred " + (tranAmount) + " from Business to Checking");
 
                                     Console.WriteLine("\nChecking Balance: " + (checking.getBalance()));
                                     Console.WriteLine("Business Balance: " + (business.getBalance()) + "\n");
+                                newTr.AccountNumber = Selection1._AccountNumber;
+                                newTr.Amount = tranAmount;
+                                newTr.Types = "Transfer ";
+                                newTr.TransactionType = "Transfer";
+                                newTr.DateTime = DateTime.Now;
+                                transList.Add(newTr);
 
-                                }
+
+                            }
 
                                 break;
 
@@ -349,11 +371,11 @@ namespace ProjectFun
 
                             Console.WriteLine("Following Details found for user: \n ");
                             foreach (var val in Selection1.transList)
-                            Console.WriteLine("Account Number: {0} Amout To be Deposited: {1} Date : {2} Types: {3}", val.AccountNumber, val.Amount, val.DateTime, val.Types + "\n");
+                            Console.WriteLine("Account Number: {0} Amount: {1} Date : {2} Account: {3}", val.AccountNumber, val.Amount, val.DateTime, val.Types + "\n");
                             // Console.WriteLine("Now We see ");
 
                             foreach (var val in transList)
-                                Console.WriteLine("Account Number: {0} Amout To be Deposited: {1} Date : {2} Types: {3}", val.AccountNumber, val.Amount, val.DateTime, val.Types+ "\n");
+                                Console.WriteLine("Account Number: {0}  Amount : {1} Date : {2} Account: {3}", val.AccountNumber, val.Amount, val.DateTime, val.Types+ "\n");
                             // Console.WriteLine("Now We see ");
 
                             break;
@@ -381,6 +403,7 @@ namespace ProjectFun
                     {
                         Console.WriteLine("Please Enter the Option from above list.");//print error indicating non-numeric input is unsupported or something more meaningful.
                     }
+               
                 }
             }
 
@@ -391,11 +414,12 @@ namespace ProjectFun
             {
 
 
-                Console.WriteLine("\ta - Do you want to open account? ");
-                Console.WriteLine("\tt - Do you want to make a transaction ");
-                Console.WriteLine("\te - Exit from application. ");
-                Console.Write("Your option? : ");
-                string option3 = Console.ReadLine();
+             Console.WriteLine("\ta - Do you want to open account? ");
+             Console.WriteLine("\tt - Do you want to make a transaction ");
+             Console.WriteLine("\tc - Do you want to Close Account.");
+             Console.WriteLine("\te - Exit from application. ");
+             Console.Write("Your option? : ");
+             string option3 = Console.ReadLine();
 
                 while (string.IsNullOrEmpty(option3))
                 {
@@ -416,9 +440,13 @@ namespace ProjectFun
                 
 
                 }
+                else if (option3 == "c"){
+
+
+            }
                 else if (option3 == "e")
                 {
-                    endApp = true;
+                    session = false;
                 }
                
                     while (!(option3 == "a") || (option3 == "t") || (option3 == "e"))

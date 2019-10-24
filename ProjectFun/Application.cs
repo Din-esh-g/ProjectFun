@@ -21,7 +21,7 @@ namespace ProjectFun
 
            Console.WriteLine("\nThank you for banking with us!\n");
 
-
+            session = false;
 
 
 

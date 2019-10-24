@@ -7,7 +7,8 @@ namespace ProjectFun
     public class Selection1
     {
         public static List<Transaction> transList = new List<Transaction>();
-        
+        public static List<Account> accList = new List<Account>();
+
 
         public static int _checkingAcc = 0;
         public static int _cdAcc = 0;
@@ -17,6 +18,7 @@ namespace ProjectFun
         public static int _transation = 0;
         public static int _AccountNumber;
        public static bool session = true;
+       
 
         public static void Option3()
         {
@@ -33,7 +35,7 @@ namespace ProjectFun
 
             while (string.IsNullOrEmpty(option1))
             {
-                Console.WriteLine("Your Selection can't be empty! Input your selection once more");
+                Console.WriteLine("\n\nYour Selection can't be empty! Input your selection once more");
                 option1 = Console.ReadLine();
             }
 
@@ -46,32 +48,26 @@ namespace ProjectFun
 
                     checking.setType("Checking");
                     newTr.Types = "Checking";
-                    checking.setBalance(000);
-                    Console.WriteLine("Please Enter the initial Balance for checking : ");
-                    double intDeposit = Convert.ToDouble(Console.ReadLine());
-                    checking.deposit(intDeposit);
+                    checking.setBalance(000);                  
                     checking.setRate(0.00);
                     Random random = new System.Random();
                     _AccountNumber = random.Next(999500, 11112500);
                     newTr.AccountNumber = _AccountNumber;
-                    newTr.Amount = intDeposit;
-                    Console.WriteLine("\nYour Account Number is : {0} Your Checking balance is now: ${1}  Interest Rate:{2} ", _AccountNumber, (checking.getBalance()), checking.getRate() + "%" + "\n\n");
-                    var time = DateTime.Now;
-                    newTr.DateTime = time;
+                    newTr.Amount = checking.getBalance();  
+                    newTr.DateTime = DateTime.Now;
                     _checkingAcc++;
                     _totalAccount++;
                     transList.Add(newTr);
                     foreach (var val in transList)
-                    Console.WriteLine("Account Number: {0} Amount To be Deposited: {1} Date : {2} Types: {3}",  val.AccountNumber,val.Amount, val.DateTime, val.Types);
-                    Console.WriteLine(time);
+                    Console.WriteLine("\n\n\t\t\t Congratulation:  \n\n Account Number: {0} Amount To be Deposited: {1} Date : {2} Types: {3} \n\n",  val.AccountNumber,val.Amount, val.DateTime, val.Types);
+                   
                     Selection sc3 = new Selection();
                     sc3.option3();
                     
-
                 }
                 else
                 {
-                    Console.WriteLine("You already have Checking account: ");
+                    Console.WriteLine("\n\nYou already have Checking account: ");
 
                 }
 
@@ -85,22 +81,28 @@ namespace ProjectFun
                 business.setType("Business");
                 business.setBalance(000);
                 business.setRate(0.00);
-                Console.WriteLine("Please Enter the initial Balance : ");
-                double intDeposit = Convert.ToDouble(Console.ReadLine());
-
-                business.deposit(intDeposit);
-
-
-                Random random = new System.Random();
+               Random random = new System.Random();
                 _AccountNumber = random.Next(999500, 11112500);
-                Console.WriteLine("\nYour Account Number is : {0} Your Buiness Account balance is now: ${1}  Interest Rate:{2} ", _AccountNumber, (business.getBalance()), business.getRate() + "%" + "\n\n");
+                Console.WriteLine("\n\n\t\t\tCongratulation:  \n\n Your Account Number is : {0} Your Buiness Account balance is now: ${1}  Interest Rate:{2} ", _AccountNumber, (business.getBalance()), business.getRate() + "%" + "\n\n");
 
 
-                // Console.WriteLine("\nYour Business Account balance is now: " + (business.getBalance()) + "\n");
+                newTr.AccountNumber = _AccountNumber;
+                newTr.Amount = business.getBalance();
+                newTr.DateTime = DateTime.Now;
+                newTr.Types = "Business";
+                transList.Add(newTr);
+
+
+               
                 _businessAcc++;
                 _totalAccount++;
                 Selection sc3 = new Selection();
                 sc3.option3();
+
+            
+
+
+
             }
             else if (option1 == "l")
             {
@@ -108,17 +110,18 @@ namespace ProjectFun
                 loan.setType("Loan");
                 loan.setBalance(000);
                 loan.setRate(0.00);
-                Console.WriteLine("Please Enter the initial Balance : ");
-                double intDeposit = Convert.ToDouble(Console.ReadLine());
-
-                loan.deposit(intDeposit);
-
-
-                Random random = new System.Random();
+              Random random = new System.Random();
                 _AccountNumber = random.Next(999500, 11112500);
-                Console.WriteLine("\nYour Account Number is : {0} Your Loan balance is now: ${1}  Interest Rate:{2} ", _AccountNumber, (loan.getBalance()), loan.getRate() + "%" + "\n\n");
+                Console.WriteLine("\n\n\t\t\tCongratulation:  \n\n Your Account Number is : {0} Your Loan balance is now: $ {1}  Interest Rate: {2} ", _AccountNumber, (loan.getBalance()), loan.getRate() + "%" + "\n\n");
 
-                Console.WriteLine("\nYour Loan account balance is now: " + (loan.getBalance()) + "\n");
+               
+
+                newTr.AccountNumber = _AccountNumber;
+                newTr.Amount = loan.getBalance();
+                newTr.DateTime = DateTime.Now;
+                newTr.Types = "Loan";
+                transList.Add(newTr);
+
                 _totalAccount++;
                 _loanAcc++;
                 Selection sc3 = new Selection();
@@ -127,19 +130,18 @@ namespace ProjectFun
             else if (option1 == "t")
             {
                 Account termDeposit = new Account();
-                termDeposit.setType("CD");
+                termDeposit.setType("Term Deposit");
                 termDeposit.setBalance(000);
                 termDeposit.setRate(2.00);
-                Console.WriteLine("Please Enter the initial Balance : ");
-                double intDeposit = Convert.ToDouble(Console.ReadLine());
-                termDeposit.deposit(intDeposit);
-
                 Random random = new System.Random();
                 _AccountNumber = random.Next(999500, 11112500);
-                Console.WriteLine("\nYour Account Number is : {0} Your CD balance is now: ${1}  Interest Rate:{2} ", _AccountNumber, (termDeposit.getBalance()), termDeposit.getRate() + "%" + "\n\n");
+                Console.WriteLine("\n\n\t\t\tCongratulation:  \n\n Your Account Number is : {0} Your CD balance is now: ${1}  Interest Rate:{2} ", _AccountNumber, (termDeposit.getBalance()), termDeposit.getRate() + "%" + "\n\n");
 
-
-                //Console.WriteLine("\nYour Term Account balance is now: " + (termDeposit.getBalance()) + "\n");
+                newTr.AccountNumber = _AccountNumber;
+                newTr.Amount = termDeposit.getBalance();
+                newTr.DateTime = DateTime.Now;                
+                newTr.Types = "Term Deposit";
+                transList.Add(newTr);
                 _totalAccount++;
                 _cdAcc++;
                 Selection sc3 = new Selection();
