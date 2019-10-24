@@ -8,11 +8,11 @@ namespace ProjectFun
     {
 
 
-        public int _userId;
-        public string _firstName;
-        public string _lastName;
-        public string _emailAddress;
-        public int _numberOfUser = 0;
+        public int _userId { get; set; }
+        public string _firstName { get; set; }
+        public string _lastName { get; set; }
+        public string _emailAddress { get; set; }
+        public int _numberOfUser { get; set; }
 
         public UserRegister(int _userId, string _firstName, string _lastName, string _emailAddress)
 
@@ -20,7 +20,7 @@ namespace ProjectFun
 
             this._userId = _userId;
             this._firstName = _firstName;
-            this._firstName = _lastName;
+            this._lastName = _lastName;
             this._emailAddress = _emailAddress;
 
 
@@ -28,47 +28,48 @@ namespace ProjectFun
 
         public UserRegister()
         {
-
         }
 
-        public List<UserRegister> userList = new List<UserRegister>();
+        public  static List<UserRegister> userList = new List<UserRegister>();
 
-        public void userDetails()
+        public static void userDetails()
         {
+            UserRegister ur = new UserRegister();
+            Console.WriteLine("Please Enter Your First Name: ");
+            ur._firstName = Console.ReadLine();
 
-            Console.WriteLine("Please Enter Your Firstname: ");
-            _firstName = Console.ReadLine();
 
-            while (string.IsNullOrEmpty(_firstName))
+            while (string.IsNullOrEmpty(ur._firstName))
             {
                 Console.WriteLine("Name can't be empty! Input your  First name once more");
-                _firstName = Console.ReadLine();
+                ur._firstName = Console.ReadLine();
+
             }
 
 
-            Console.WriteLine("Please Enter Your Last name: ");
-            _lastName = Console.ReadLine();
+            Console.WriteLine("Please Enter Your Last Name: ");
+            ur._lastName = Console.ReadLine();
 
-            while (string.IsNullOrEmpty(_lastName))
+            while (string.IsNullOrEmpty(ur._lastName))
             {
                 Console.WriteLine(" Last Name can't be empty! Input your Last name once more");
-                _lastName = Console.ReadLine();
+                ur._lastName = Console.ReadLine();
             }
 
 
             Console.WriteLine("Please Enter Your Email Address");
-            _emailAddress = Console.ReadLine();
+            ur._emailAddress = Console.ReadLine();
 
-            while (string.IsNullOrEmpty(_emailAddress))
+            while (string.IsNullOrEmpty(ur._emailAddress))
             {
                 Console.WriteLine("Email Field can't be empty! Input your email address once more");
 
 
-                bool ValidateEmail = ValidaterEmail(_emailAddress);
+                bool ValidateEmail = ValidaterEmail(ur._emailAddress);
 
                 if (ValidateEmail)
                 {
-                    _emailAddress = Console.ReadLine();
+                    ur._emailAddress = Console.ReadLine();
 
                 }
                 else
@@ -79,28 +80,29 @@ namespace ProjectFun
                 }
             }
 
-
-
-
+                       
             Random random = new System.Random();
-            _userId = random.Next(500, 2500);
-
-            List<UserRegister> userList = new List<UserRegister>() {
-                new UserRegister(){ _userId=this._userId, _firstName= this._firstName, _lastName= this._lastName,_emailAddress= _emailAddress} };
+            ur._userId = random.Next(500, 2500);
 
 
 
+            userList.Add(ur);
             Console.WriteLine("Thank you for Registration !!! \n\n");
 
-            Console.WriteLine("Your Registration Detais\n Full Name : {0} Email i: {1}  UserId:  {2} ", _firstName + " " + _lastName, _emailAddress, _userId);
+           // Console.WriteLine("Your Registration Detais\n Full Name : {0} Email i: {1}  UserId:  {2} ", ur._firstName + " " + ur._lastName, ur._emailAddress, ur._userId);
+
+            foreach (var el in userList)
+            Console.WriteLine("First Name: {0} Last Name: {1} Email Id: {2} UserId : {3} ", el._firstName, el._firstName, el._emailAddress, el._userId);
+
+           
             Console.WriteLine("\n\n");
-            Selection.option1();
+         
 
 
         }
 
 
-        public bool ValidaterEmail(string email)
+        public static bool ValidaterEmail(string email)
         {
             System.Text.RegularExpressions.Regex emailRegex = new System.Text.RegularExpressions.Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             System.Text.RegularExpressions.Match emailMatch = emailRegex.Match(email);
@@ -108,5 +110,5 @@ namespace ProjectFun
         }
 
 
-    }
+    } 
 }
