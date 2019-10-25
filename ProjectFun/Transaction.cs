@@ -11,8 +11,12 @@ namespace ProjectFun
         string _types;
         int _accountNumber;
         string _tranType;
-        string _status;
-        public Transaction(DateTime dateTime, double amount, string types, int _accountNumber, string tranType, string sts )
+        bool _status;
+        double _period;
+        
+
+
+        public Transaction(DateTime dateTime, double amount, string types, int _accountNumber, string tranType, bool sts, double pt )
         {
             this._dateTime = dateTime;
             this._amount = amount;
@@ -20,6 +24,7 @@ namespace ProjectFun
             this._accountNumber = _accountNumber;
             this._tranType =tranType;
             this._status = sts;
+            this._period = pt;
 
         }
         public Transaction()
@@ -86,17 +91,31 @@ namespace ProjectFun
                 this._tranType = value;
             }
         }
-        public string AccountStatus
+        public bool StatusTypes
         {
             get
             {
-                return _tranType;
+                return _status;
             }
             set
             {
-                this._tranType = value;
+                this._status = value;
             }
         }
+
+        public double Period
+        {
+            get
+            {
+                return _period;
+            }
+            set
+            {
+                this._period = value;
+            }
+
+        }
+
 
     }
 }

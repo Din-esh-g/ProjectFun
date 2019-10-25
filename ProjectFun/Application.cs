@@ -15,8 +15,7 @@ namespace ProjectFun
             {
                 Selection newsc = new Selection();
                 newsc.option0();
-                
-                newsc.option1();
+              
             }
 
            Console.WriteLine("\nThank you for banking with us!\n");

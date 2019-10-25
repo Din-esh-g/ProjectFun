@@ -13,13 +13,15 @@ namespace ProjectFun
         String type;
         double balance;
         double rate;
-        int _AccountNumber;
+        int accountNumber;
         string status;
+        double period;
+        DateTime Opendate;
 
         // The following methods are a combination of getter/setter methods as well
         // as two special deposit() and withdraw() methods
 
-        
+
         public void setType(String accType)
         {
 
@@ -30,7 +32,7 @@ namespace ProjectFun
 
             return type;
         }
-    
+
 
         public void setBalance(double accBal)
         {
@@ -54,27 +56,31 @@ namespace ProjectFun
 
             return rate;
         }
-        public  void deposit(double dep)
+        public void deposit(double dep)
         {
 
             balance += dep; // Take the Account object's balance and add to it the current deposit
         }
 
-       public void withdraw(double wit)
+        public void withdraw(double wit)
         {
 
             balance -= wit; // Take the Account object's balance and subtract from it the current withdrawal
         }
 
 
-      
 
-      
 
-   
+
+          
         public void setAccountnumber(int acc)
         {
-            _AccountNumber = acc;
+            accountNumber = acc;
+        }
+        public int getAccountnumber()
+        {
+
+            return accountNumber;
         }
 
         public string AccountStatus
@@ -89,6 +95,32 @@ namespace ProjectFun
             }
         }
 
+        public void setPeriod(double pt)
+        {
+
+            period = pt;
+        }
+        public double getPeriod()
+        {
+
+            return period;
+        }
+
+
+
+
+        public void seOpenDate(DateTime dt)
+        {
+
+            Opendate = dt;
+        }
+        public DateTime getOpenDate()
+        {
+
+            return Opendate;
+        }
+
+
+
     }
 }
-
